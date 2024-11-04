@@ -16,10 +16,16 @@ async function fetchTickets() { // create an async function to fetch tickets
             throw new Error("No tickets found.");
         }
         
-        // Display tickets in the container if data is found
-        tickets.forEach(ticket => {
+        // Task 3: Display Tickets Dynamically on the Page
+        tickets.forEach(ticket => { // display each ticket in the container
             const ticketElement = document.createElement('div');
-            ticketElement.textContent = `Ticket ID: ${ticket.id}, Title: ${ticket.title}`;
+            ticketElement.innerHTML = `
+                <h3>Ticket ID: ${ticket.id}</h3>
+                <p><strong>Customer Name:</strong> User ${ticket.userId}</p>
+                <p><strong>Issue Description:</strong> ${ticket.title}</p>
+                <p><strong>Details:</strong> ${ticket.body}</p>
+                <hr>
+            `;
             ticketContainer.appendChild(ticketElement);
         });
     } catch (error) {
