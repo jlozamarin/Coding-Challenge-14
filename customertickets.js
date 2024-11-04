@@ -4,9 +4,11 @@
 
 const ticketContainer = document.getElementById('ticketContainer'); // select the container to display tickets
 const errorMessage = document.getElementById('errorMessage'); // select the element to display error messages
+const loadingIndicator = document.getElementById('loadingIndicator'); // define the loading indicator variable
 
 async function fetchTickets() { // create an async function to fetch tickets
     try {
+        loadingIndicator.style.display = 'block';
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         if (!response.ok) { // check if the response is not okay
             throw new Error("Failed to fetch tickets. Please try again later.");
@@ -30,6 +32,8 @@ async function fetchTickets() { // create an async function to fetch tickets
         });
     } catch (error) {
         errorMessage.textContent = error.message; // error message is displayed if there is an error
-    }
+} finally { // Task 4: Use finally to Ensure Cleanup
+    loadingIndicator.style.display = 'none'; 
 }
+    }
 fetchTickets(); // function to fetch tickets
